@@ -5,6 +5,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 
 @RepositoryRestResource(exported = false)
-public interface UserRepository extends CrudRepository<User,Long> {
-   String  findByUsername(String username);
+public interface ApplicationUserRepository extends CrudRepository<ApplicationUser,Long> {
+   ApplicationUser  findByUserName(String userName);
 }

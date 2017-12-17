@@ -32,7 +32,7 @@ public class Course extends BaseEntity {
 
     public void addReview(Review review) {
         review.setCourse(this);
-        //reviewList.add(review);
+        reviewList.add(review);
     }
     public String getTitle() {
         return title;

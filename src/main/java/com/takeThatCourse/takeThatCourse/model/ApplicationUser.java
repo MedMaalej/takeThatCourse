@@ -8,8 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.Entity;
 
 @Entity
-public class User extends BaseEntity {
-    private static final PasswordEncoder PASSWORD_ENCODER =
+public class ApplicationUser extends BaseEntity {
+    public static final PasswordEncoder PASSWORD_ENCODER =
             new BCryptPasswordEncoder();
     private String firstName;
     private String lastName;
@@ -19,11 +19,11 @@ public class User extends BaseEntity {
     @JsonIgnore
     private String [] roles;
 
-    protected User() {
+    protected ApplicationUser() {
         super();
     }
 
-    public User(String firstName, String lastName, String userName, String password, String[] roles) {
+    public ApplicationUser(String firstName, String lastName, String userName, String password, String[] roles) {
         this();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -32,9 +32,6 @@ public class User extends BaseEntity {
         this.roles = roles;
     }
 
-    public static PasswordEncoder getPasswordEncoder() {
-        return PASSWORD_ENCODER;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -61,6 +58,9 @@ public class User extends BaseEntity {
     }
 
 
+    public String getPassword() {
+        return password;
+    }
 
     public void setPassword(String password) {
         this.password = PASSWORD_ENCODER.encode(password);
