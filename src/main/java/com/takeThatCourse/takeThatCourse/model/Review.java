@@ -11,13 +11,23 @@ public class Review extends BaseEntity {
     private String description;
     @ManyToOne
     private Course course;
+    @ManyToOne
+    private User reviewer;
     public Review() {
-
+      super();
     }
     public Review(int rating, String description) {
-        super();
+        this();
         this.rating = rating;
         this.description = description;
+    }
+
+    public User getReviewer() {
+        return reviewer;
+    }
+
+    public void setReviewer(User reviewer) {
+        this.reviewer = reviewer;
     }
 
     public int getRating() {

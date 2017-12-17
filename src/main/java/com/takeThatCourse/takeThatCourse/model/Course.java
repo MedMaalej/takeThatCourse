@@ -25,7 +25,7 @@ public class Course extends BaseEntity {
     }
 
     public Course(String title, String url) {
-        super();
+        this();
         this.title = title;
         this.url = url;
     }
