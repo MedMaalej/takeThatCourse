@@ -1,6 +1,7 @@
 package com.takeThatCourse.takeThatCourse.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.takeThatCourse.takeThatCourse.core.BaseEntity;
 
 import javax.persistence.CascadeType;
@@ -17,7 +18,7 @@ public class Course extends BaseEntity {
     private String title;
     private String url;
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    List<Review> reviewList;
+    private List<Review> reviewList;
 
     protected Course() {
        super();
@@ -58,4 +59,6 @@ public class Course extends BaseEntity {
     public void setReviewList(List<Review> reviewList) {
         this.reviewList = reviewList;
     }
+
+
 }

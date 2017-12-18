@@ -21,7 +21,7 @@ public class DatabaseLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
-        Course course = new Course("React course", "https://teamtreehouse.com/library/react-fundamentals");
+      /*  Course course = new Course("React course", "https://teamtreehouse.com/library/react-fundamentals");
         Course course2 = new Course("Angular foundations", "https://teamtreehouse.com/library/angular-fundamentals");
         Course course3 = new Course("Ionic: getting started", "https://teamtreehouse.com/library/ionic-fundamentals");
         Review review = new Review(2, "Fairly good !");
@@ -43,6 +43,6 @@ public class DatabaseLoader implements ApplicationRunner {
 
         courseRepository.save(course);
         courseRepository.save(course2);
-        courseRepository.save(course3);
+        courseRepository.save(course3);*/
     }
 }

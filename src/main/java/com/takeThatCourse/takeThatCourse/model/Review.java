@@ -1,5 +1,6 @@
 package com.takeThatCourse.takeThatCourse.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.takeThatCourse.takeThatCourse.core.BaseEntity;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ public class Review extends BaseEntity {
 
     private int rating;
     private String description;
+    @JsonIgnore
     @ManyToOne
     private Course course;
     @ManyToOne
