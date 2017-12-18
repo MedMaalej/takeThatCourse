@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Take That Course (TTC)</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/star-rating-min.css}" />
+    <link rel="stylesheet" th:href="@{/css/materialize.css}" />
+    <script th:src="@{/js/jquery.min.js}">
+
+    </script>
+    <script th:src="@{/js/bootstrap.min.js}">
+
+    </script>
+
+    <script th:src="@{/js/materialize.js}">
+
+    </script>
+    <script th:src="@{/js/star-rating-min.js}">
+
+    </script>
+
+
+</head>
+<body>
+
+<div class="navbar-fixed">
+    <nav>
+        <div class="container">
+            <a th:href="@{/}" class="brand-logo">TTC</a>
+            <a href="#" data-activates="mobile-nav" class="button-collapse right"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li class="active"><a th:href="@{/}">Explore</a></li>
+                <li><a th:href="@{/allReviews}">All reviews</a></li>
+
+            </ul>
+            <ul id="mobile-nav" class="side-nav">
+                <li class="active"><a th:href="@{/}">Explore</a></li>
+                <li><a th:href="@{/allReviews}">All reviews</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="container">
+
+    <div class="row">
+        <div th:each="course : ${courses}">
+            <h3 th:text="${course.title}">
+
+            </h3>
+            <a th:href="@{${course.url}}">
+                <div th:text="${course.url}"></div>
+            </a>
+            <div class="my-rating"></div>
+            <div class="col s12">
+                 <textarea class="materialize-textarea"> </textarea>
+            </div>
+            <br/>
+            <button class="btn btn-info">Submit</button>
+
+        </div>
+    </div>
+    <script>
+        $(".my-rating").starRating({
+            starSize: 25,
+            callback: function(currentRating, $el){
+                alert(currentRating);
+            }
+        });
+    </script>
+</div>
+
+</body>
+</html>

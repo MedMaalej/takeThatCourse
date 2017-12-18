@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class Review extends BaseEntity {
 
-    private int rating;
+    private float rating;
     private String description;
     @JsonIgnore
     @ManyToOne
@@ -31,11 +31,11 @@ public class Review extends BaseEntity {
         this.reviewer = reviewer;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
