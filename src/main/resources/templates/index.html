@@ -27,14 +27,13 @@
     <nav>
         <div class="container">
             <a th:href="@{/}" class="brand-logo">TTC</a>
-            <a href="#" data-activates="mobile-nav" class="button-collapse right"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li class="active"><a th:href="@{/}">Explore</a></li>
+                <li class="active"><a th:href="@{/}">Make reviews</a></li>
                 <li><a th:href="@{/allReviews}">All reviews</a></li>
 
             </ul>
             <ul id="mobile-nav" class="side-nav">
-                <li class="active"><a th:href="@{/}">Explore</a></li>
+                <li class="active"><a th:href="@{/}">Make reviews</a></li>
                 <li><a th:href="@{/allReviews}">All reviews</a></li>
             </ul>
         </div>
@@ -44,17 +43,15 @@
 
     <div class="row">
         <div th:each="course : ${courses}">
-            <h3 th:text="${course.title}">
+            <h4 th:text="${course.title}">
 
-            </h3>
+            </h4>
             <a th:href="@{${course.url}}">
                 <div th:text="${course.url}"></div>
             </a>
             <div class="my-rating"></div>
-            <div class="col s12">
-                 <textarea class="materialize-textarea"> </textarea>
-            </div>
-            <br/>
+            <textarea class="materialize-textarea col s6"> </textarea>
+            <br/><br/><br/>
             <button class="btn btn-info">Submit</button>
 
         </div>
