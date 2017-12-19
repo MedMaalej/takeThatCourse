@@ -41,7 +41,7 @@ public class CourseController {
                 unratedCourses.add(course);
             }
         }
-        Logger.getAnonymousLogger().info("USR_NAME:"+user.toString());
+        modelMap.put("review",new Review());
         modelMap.put("courses",unratedCourses);
         return "index";
     }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Take That Course (TTC)- All courses reviews</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/materialize.css}"/>
+    <script th:src="@{/js/jquery.min.js}">
+
+    </script>
+    <script th:src="@{/js/bootstrap.min.js}">
+
+    </script>
+
+    <script th:src="@{/js/materialize.js}">
+
+    </script>
+
+
+</head>
+<body>
+<div class="navbar-fixed">
+    <nav>
+        <div class="container">
+            <a th:href="@{/}" class="brand-logo">TTC</a>
+            <ul class="right hide-on-med-and-down">
+                <li class="active"><a th:href="@{/}">Make reviews</a></li>
+                <li><a th:href="@{/allReviews}">All reviews</a></li>
+
+            </ul>
+            <ul id="mobile-nav" class="side-nav">
+                <li class="active"><a th:href="@{/}">Make reviews</a></li>
+                <li><a th:href="@{/allReviews}">All reviews</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="container">
+
+    <div class="row">
+
+        <div th:each="courseReviews : ${allReviews}">
+            <h4> <span th:text="${courseReviews.key.title}"></span></h4>
+               <h5><span th:text="${courseReviews.key.url}"></span> </h5>
+            <div th:each="review : ${courseReviews.value}">
+                <b><span th:text="${review.reviewer.firstName}+' '+${review.reviewer.lastName}"></span></b>
+                <br/>
+                <span th:text="${review.rating}+'/5'"></span>
+                <br/>
+                <span th:text="${review.description}"></span>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

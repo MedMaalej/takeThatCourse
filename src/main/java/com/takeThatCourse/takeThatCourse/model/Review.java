@@ -18,7 +18,7 @@ public class Review extends BaseEntity {
     public Review() {
       super();
     }
-    public Review(int rating, String description) {
+    public Review(float rating, String description) {
         this.rating = rating;
         this.description = description;
     }

@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Take That Course (TTC)</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
-    <link rel="stylesheet" th:href="@{/css/star-rating-min.css}" />
-    <link rel="stylesheet" th:href="@{/css/materialize.css}" />
+    <title>Take That Course (TTC)- My courses reviews</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/star-rating-min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/materialize.css}"/>
     <script th:src="@{/js/jquery.min.js}">
 
     </script>
@@ -42,6 +42,7 @@
 <div class="container">
 
     <div class="row">
+
         <div th:each="course : ${courses}">
             <h4 th:text="${course.title}">
 
@@ -50,21 +51,32 @@
                 <div th:text="${course.url}"></div>
             </a>
             <div class="my-rating"></div>
-            <textarea class="materialize-textarea col s6"> </textarea>
-            <br/><br/><br/>
-            <button class="btn btn-info" th:id="${course.id}" onclick="disable(this)">Submit</button>
+            <input type="hidden" id="currRating"/>
+            <form th:id="'frm-'+${course.id}" action="#" th:action="@{/addReview}"  th:object="${review}" method="post">
 
+                <input type="hidden" th:id="'rating-'+${course.id}" name="rating" th:value="*{rating}" />
+
+                <textarea class="materialize-textarea col s6" id="description" name="description" th:value="*{description}"> </textarea>
+                <br/><br/><br/>
+                <button class="btn btn-info" th:id="'btn-'+${course.id}" onclick="disable(this)">Submit</button>
+            </form>
         </div>
     </div>
     <script>
         $(".my-rating").starRating({
             starSize: 25,
-            callback: function(currentRating, $el){
-                alert(currentRating);
+            callback: function (currentRating, $el) {
+
+                document.getElementById("currRating").value = currentRating;
+
             }
         });
+
         function disable(btn) {
             document.getElementById(btn.id).disabled = true;
+            document.getElementById('rating-'+btn.id.split("-")[1]).value =
+            document.getElementById("currRating").value;
+            document.forms['frm-'+btn.id.split("-")[1]].submit();
         }
     </script>
 </div>
