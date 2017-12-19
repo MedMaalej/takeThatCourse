@@ -52,7 +52,7 @@
             <div class="my-rating"></div>
             <textarea class="materialize-textarea col s6"> </textarea>
             <br/><br/><br/>
-            <button class="btn btn-info">Submit</button>
+            <button class="btn btn-info" th:id="${course.id}" onclick="disable(this)">Submit</button>
 
         </div>
     </div>
@@ -63,6 +63,9 @@
                 alert(currentRating);
             }
         });
+        function disable(btn) {
+            document.getElementById(btn.id).disabled = true;
+        }
     </script>
 </div>
 
