@@ -1,11 +1,10 @@
 package com.takeThatCourse.takeThatCourse.controller;
 
-import com.takeThatCourse.takeThatCourse.model.Course;
-import com.takeThatCourse.takeThatCourse.model.CourseRepository;
-import com.takeThatCourse.takeThatCourse.model.Review;
-import com.takeThatCourse.takeThatCourse.model.ReviewRepository;
+import com.takeThatCourse.takeThatCourse.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -25,6 +24,8 @@ public class ReviewController {
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private ApplicationUserRepository applicationUserRepository;
     @RequestMapping(value = "/allReviews", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String getReviews(ModelMap modelMap) {
         List<Course> courseList = (List<Course>) courseRepository.findAll();
@@ -34,19 +35,24 @@ public class ReviewController {
                 coursesReviews.put(c, c.getReviewList());
         }
         modelMap.put("allReviews", coursesReviews);
-        return "allReviews";
+        return "showAllReviews";
     }
 
     @RequestMapping(value = "/addReview", method = RequestMethod.POST)
 
     public String submit(@Valid @ModelAttribute("review") Review review,
                          BindingResult result, ModelMap model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ApplicationUser applicationUser = applicationUserRepository.findByUserName(user.getUsername());
         if (result.hasErrors()) {
             return "error";
         }
-        model.put("rating", review.getRating());
-        model.put("description", review.getDescription());
-        return "reviewSent";
+        if (review.getCourse() != null)
+            courseRepository.save(review.getCourse());
+        review.setReviewer(applicationUser);
+        reviewRepository.save(review);
+
+        return "redirect:/allReviews";
     }
 
 }

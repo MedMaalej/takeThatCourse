@@ -52,13 +52,13 @@
             </a>
             <div class="my-rating"></div>
             <input type="hidden" id="currRating"/>
+
             <form th:id="'frm-'+${course.id}" action="#" th:action="@{/addReview}"  th:object="${review}" method="post">
-
+                <input type="hidden" id="course" name="course" th:value="${course.id}"/>
                 <input type="hidden" th:id="'rating-'+${course.id}" name="rating" th:value="*{rating}" />
-
                 <textarea class="materialize-textarea col s6" id="description" name="description" th:value="*{description}"> </textarea>
                 <br/><br/><br/>
-                <button class="btn btn-info" th:id="'btn-'+${course.id}" onclick="disable(this)">Submit</button>
+                <button class="btn btn-info" th:id="'btn-'+${course.id}" onclick="sendForm(this)">Submit</button>
             </form>
         </div>
     </div>
@@ -72,10 +72,11 @@
             }
         });
 
-        function disable(btn) {
+        function sendForm(btn) {
             document.getElementById(btn.id).disabled = true;
             document.getElementById('rating-'+btn.id.split("-")[1]).value =
             document.getElementById("currRating").value;
+
             document.forms['frm-'+btn.id.split("-")[1]].submit();
         }
     </script>
